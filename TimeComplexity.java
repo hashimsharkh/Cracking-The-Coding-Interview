@@ -173,6 +173,31 @@ public class TimeComplexity
 		else
 			return a*power(a,b-1);
 	}
+
+	//Q3- Another mathematical operation and this computes a mod b using euclidean algorithm
+	//This is just simply O(1) as it is doing a constant amount of work
+	public static int mod(int a,int b)
+	{
+		if(b<=0)
+			return -1;
+		int div = a/b;
+		return a-div*b;
+	}
+
+	//Q4- Integer division is performed by the following code(a and b are positive)
+	//As observed one for loop that iterates through a/b times
+	//Therefore O(a/b) is the runtime
+	public static int div(int a,int b)
+	{
+		int count=0;
+		int sum=b;
+		while(sum<=a)
+		{
+			sum+=b;
+			count++;
+		}
+		return count;
+	}
 	public static void main(String[] args)
 	{
 		int arr[]={1,2,3,4,5,6};
