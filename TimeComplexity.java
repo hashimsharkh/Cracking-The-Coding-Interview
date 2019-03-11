@@ -198,6 +198,26 @@ public class TimeComplexity
 		}
 		return count;
 	}
+
+	//Q5- The following code computes the integer square root of a number. If the number is not a perfect square root then
+	//It returns -1. This is done by successive guessing.If n is 100 it first guesses 50. Too high? Try something lower -halfway 
+	//between 1 and 50
+	//This runs at O(log n) as it is basically doing a binary search to find the square root 
+	public static int sqrt (int n)
+	{
+		return sqrt_helper(n,1,n);
+	}
+
+	public static int sqrt_helper(int n,int min, int max)
+	{
+		if(max<min) return -1; //No square root
+
+		int guess= (min+max)/2;
+		if(guess*guess==n)return guess;
+		else if(guess*guess<n)
+			return sqrt_helper(n,guess+1,max)
+		else return sqrt_helper(n,min,guess-1)
+	}
 	public static void main(String[] args)
 	{
 		int arr[]={1,2,3,4,5,6};
