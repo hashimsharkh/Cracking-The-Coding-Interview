@@ -257,6 +257,25 @@ public class TimeComplexity
 		bigger[bigger.length-1]=value;
 		return bigger;
 	}
+
+	//Q10- The following code sums the digit in a number
+	//Immediately, you notice that it depends on how many digits there are in n and how much it takes to reach 1 after
+	//dividing by 10
+	//Lets express that mathematically, 10^k=n logn=k
+	//Therefore, O(log n) is the run time
+
+	int sumDigits(int n)
+	{
+		int sum=0;
+		while(n>0)
+		{
+			sum+=n%10;
+			n=n/10;
+		}
+		return sum;
+	}
+
+	
 	public static void main(String[] args)
 	{
 		int arr[]={1,2,3,4,5,6};
