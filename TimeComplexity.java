@@ -229,6 +229,34 @@ public class TimeComplexity
 			if(guess*guess==n)return guess;
 		return -1;
 	}
+
+	//Q7 and Q8- HAVENT STUDIED BINARY SEARCH TREES YET
+	
+	//Q9-The appendToNew method appends a value to an array by creating a new, longer array and returning the longer array
+	//You've used the appendToNew method to create a copyArray function that repeatedly calls appendToNew. How long does 
+	//Copying an array take
+	//Basically, what is happening according to my understanding is you start with an array called copy of no size then each 
+	//value in array is copied starting with one copy then 2 copies then 3....
+	//The work done is the sum of the natural numbers from 1 to n, which is n(1+n)/2 
+	//Therefore the order is O(n^2)
+	public static int [] copyArray(int [] array)
+	{
+		int [] copy =new int[0];
+		for(int value:array)
+		{
+			copy = appendToNew(copy,value);
+		}
+		return copy;
+	}
+	public static int [] appendToNew(int [] array,int value)
+	{
+		int [] bigger = new int[array.length+1];
+		for(int i=0;i<array.length;i++)
+			bigger[i] = array[i];
+		//Add new element
+		bigger[bigger.length-1]=value;
+		return bigger;
+	}
 	public static void main(String[] args)
 	{
 		int arr[]={1,2,3,4,5,6};
