@@ -215,14 +215,25 @@ public class TimeComplexity
 		int guess= (min+max)/2;
 		if(guess*guess==n)return guess;
 		else if(guess*guess<n)
-			return sqrt_helper(n,guess+1,max)
-		else return sqrt_helper(n,min,guess-1)
+			return sqrt_helper(n,guess+1,max);
+		else return sqrt_helper(n,min,guess-1);
+	}
+
+	//Q6- The following code computes the integer square root of a number like Q5 but this time it does this by trying
+	//incrasingly large numbers
+	//The for loop iterates square root n times therefore
+	//The runtime is O(sqrt(n))
+	public static int squareRoot(int n)
+	{
+		for(int guess=1;guess*guess<=n;guess++)
+			if(guess*guess==n)return guess;
+		return -1;
 	}
 	public static void main(String[] args)
 	{
 		int arr[]={1,2,3,4,5,6};
 		allPrimes(100);
 		powersOf2(65);
-
+		permutation("Alyssa");
 	}
 }
