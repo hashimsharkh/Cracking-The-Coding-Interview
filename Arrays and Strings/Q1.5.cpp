@@ -5,13 +5,16 @@
 #include<map>
 #include <string>
 #include <iterator>
+#include<cmath>
+#include <cstdlib>
 using namespace std;
-
+//Answer time complexity (O(N_))
 //Observed the follwing:
 //Base Case: if first string is the same as second string 0 edits were made
 //If insert edit is used, 2nd string will have one more character than first string
 //If replace edit is used, both will have the same size (2 cases where first and second string are the same size)
 //If remove edit is used, second string will have one less string than the first one
+
 bool isOneEditAway(string,string);
 bool isOneEditAwayReplace(string,string);
 bool isOneEditAwayRemove(string,string);
@@ -20,19 +23,24 @@ bool isOneEditAwayInsert(string,string);
 
 int main()
 {
-	string first = "pale",second = "bale";
+	string first = "Alyss",second = "Alyssa";
 
 	cout<<"Are the strings one edit away: "<<isOneEditAway(first,second)<<endl;
 }
 
  bool isOneEditAway(string first,string second)
 {
+	int length1= first.length();
+	int length2= second.length();
+	if(abs(length1-length2)>1)
+		return false;
+
 	if(first.length()==second.length())
 	{	if(first==second)
 			return true;
 		return isOneEditAwayReplace(first,second);
 	}
-	if(first.length()<second.length())
+	 if(first.length()<second.length())
 		return isOneEditAwayInsert(first,second);
 
 	return isOneEditAwayRemove(first,second);
@@ -54,21 +62,30 @@ bool isOneEditAwayReplace(string first,string second)
 bool isOneEditAwayRemove(string first,string second)
 {
 
-	//Assume ascii characters are 128
-	int charFrequency[128]={0};
-	int count=0;
-	for(char c:first)
-		charFrequency[(int)c]++;
+	int index1=0,index2=0, count=0;
 
-	for(char c: second)
-		if(!charFrequency[c])
-			count++;
+	while(index1<first.length()&&index2<second.length())
+	{
+		if(first[index1]!=second[index2])
+		{
+			
+			if(index1!=index2)
+				return false;
+			index2++;
 
-		//used for replace
-		if(first.length()==second.length())
-			return count<=1;
-
-		return !count;//can be merged with replace
+			if(first.length()==second.length())
+			{
+				count++;
+				index1++;	
+			}
+		}
+		else
+		{
+			index1++;
+			index2++;
+		}
+	}
+	return count<=1;
 
 
 }
