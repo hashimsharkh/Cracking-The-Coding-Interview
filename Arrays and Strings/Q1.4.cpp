@@ -1,3 +1,6 @@
+//Q1.4
+//Hashim Abu Sharkh
+
 #include <iostream>
 #include <map>
 #include <iterator>
