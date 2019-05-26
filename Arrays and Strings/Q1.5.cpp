@@ -8,7 +8,7 @@
 #include<cmath>
 #include <cstdlib>
 using namespace std;
-//Answer time complexity (O(N_))
+//Answer time complexity (O(N))
 //Observed the follwing:
 //Base Case: if first string is the same as second string 0 edits were made
 //If insert edit is used, 2nd string will have one more character than first string
