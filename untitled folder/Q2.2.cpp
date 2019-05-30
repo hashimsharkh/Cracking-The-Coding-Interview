@@ -27,7 +27,7 @@ Node* kthToLastElement(Node* head,int k)
 	return head; 
 }
 
-//Printing kthToLastElement recursive approach
+//Printing kthToLastElement recursive approach, uses O(n) space
 int printKthToLastElement(Node* head,int k)
 {
 	if(head==NULL)
