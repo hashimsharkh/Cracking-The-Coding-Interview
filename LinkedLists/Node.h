@@ -14,17 +14,8 @@ class Node
 	Node(int d,Node* n=NULL):data(d),next(n){}
 
 
-	void appendToTail(int d)
-	{
-		Node* end = new Node(d);
-
-		Node *n=this;
-
-		while(n->next!=NULL)
-			n=n->next;
-		n->next=end;
-		n->next->next=NULL;
-	}
+	void appendToTail(int );
+	
 
 	void printLinkedList(Node* head)
 	{

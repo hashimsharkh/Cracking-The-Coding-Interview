@@ -5,10 +5,12 @@
 #include "Node.h"
 using namespace std;
 
-//First thoughts- can be done using recursion as problem can be divided into subproblems wiht the expense of at least having a space complexity of O(N) 
+//First thoughts- can be done using recursion as problem can be divided into subproblems with the expense of at least having a space complexity of O(N) 
+//Traverse through the list once add all the 
+//Create two linked lists then merge them
 //Creating a new linked list
 
-
+//Time complexity O(n) as linked list traversed once, space complexity O(n) n is the size of the linked list
 void partition(Node* head,int x,Node* newList)
 {
 	if(head==NULL)
@@ -25,9 +27,14 @@ void partition(Node* head,int x,Node* newList)
 
 	if(head->getData()>=x)
 	{
-		newList->appendToTail(head->getData());
+		if(newList->getData()==0)
+			newList->setData(head->getData());
+		else 
+			newList->appendToTail(head->getData());
 	}
 }
+
+
 
 
 int main()
@@ -50,4 +57,9 @@ int main()
 	cout<<"The partitioned linked List is: ";
 	head->printLinkedList(newList);
 	cout<<endl;
+
+	head=NULL;
+	newList = NULL;
+	delete head;
+	delete newList;
 }
