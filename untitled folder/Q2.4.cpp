@@ -2,52 +2,69 @@
 //Q2.4- Partion a linked list around a value k
 
 #include <iostream>
-#include "Node.h"
+#include "LinkedList.h"
 using namespace std;
 
 //First thoughts- can be done using recursion as problem can be divided into subproblems wiht the expense of at least having a space complexity of O(N) 
-//Creating a new linked list
+//Creating a new temporary linked list which will store the items is a must, creating two would allow the items to stay in their relative items
+//The whole idea is the same as if it were to be done in real life, scan through the linked list, add the items less than the value to the head of the list, the items bigger to
+//the tail
 
 
-void partition(Node* head,int x,Node* newList)
+//This was created before creation of linked list class
+void partition(SinglyLinkedListNode* head,int x,SinglyLinkedList* newList)
 {
 	if(head==NULL)
 		return ;
 
-	if(head->getData()<x)
-	{	if(newList->getData()==0)
-			newList->setData(head->getData());
-		else 
-			newList->appendToTail(head->getData());
-	}
+	if(head->data<x)
+        newList->appendToTail(head->data);
 	
-	partition(head->getNext(),x,newList);
+	partition(head->next,x,newList);
 
-	if(head->getData()>=x)
-	{
-		newList->appendToTail(head->getData());
-	}
+	if(head->data>=x)
+		newList->appendToTail(head->data);
+	
 }
+
 
 
 int main()
 {
-	Node * head = new Node(3);
-	head->appendToTail(5);
-	head->appendToTail(8);
-	head->appendToTail(5);
-	head->appendToTail(10);
-	head->appendToTail(2);
-	head->appendToTail(1);
+    SinglyLinkedList * llist = new SinglyLinkedList();
 
-	cout<<"The linked List is: ";
-	head->printLinkedList(head);
-	cout<<endl;
-
-	//Testing function 
-	Node* newList = new Node(0);
-	partition(head,5,newList);
-	cout<<"The partitioned linked List is: ";
-	head->printLinkedList(newList);
-	cout<<endl;
+    int llistCount;
+    cout<<"How many items do you want to have in the list? "<<endl;
+    cin>>llistCount;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    cout<<"What integers do you want to have in your list?"<<endl;
+    for(int i=0;i<llistCount;i++)
+    {
+        int llistItem;
+        cin>>llistItem;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        llist->appendToTail(llistItem);
+    }
+    
+    cout<<"Print the Linked List: \n";
+    printLinkedList(llist->head);
+    cout<<endl;
+    
+    cout<<"What Number do you want to partition it at: "<<endl;
+    int partitionInput;
+    cin>>partitionInput;
+    
+    SinglyLinkedList * tempList = new SinglyLinkedList();
+    
+    partition(llist->head,partitionInput,tempList);
+    
+    cout<<"Print the Partitioned Linked List: "<<endl;
+    printLinkedList(tempList->head);
+    cout<<endl;
+    
+    free_singly_linked_list(llist->head);
+    free_singly_linked_list(tempList->head);
+    
 }

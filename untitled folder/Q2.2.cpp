@@ -1,6 +1,31 @@
 #include <iostream>
-#include "Node.h"
 using namespace std;
+
+//Implenentation of Node before creation of linked list class
+class Node
+{
+private:
+    Node* next;
+    int data;
+    
+public:
+    
+    Node(int d,Node* n=NULL):data(d),next(n){}
+    
+    void appendToTail(int );
+    
+    void printLinkedList(Node* );
+    
+    int getData() const;
+    
+    Node* getNext() const;
+    
+    void setNext(Node * );
+    
+    void setData(int );
+    
+};
+
 //Q2.2 - Return kth to last element
 
 //If size is known, just iterate with a pointer until length-k, time Complexity O(N), space Complexity (O(1)) 
@@ -87,3 +112,49 @@ int main()
 	delete head;
 
 }
+
+
+void Node:: appendToTail(int d)
+{
+    Node* end = new Node(d);
+    
+    Node *n=this;
+    
+    while(n->next!=NULL)
+        n=n->next;
+    n->next=end;
+    n->next->next=NULL;
+    
+    end = NULL;
+    delete end;
+}
+
+void Node:: printLinkedList(Node* head)
+{
+    if(head!=NULL)
+    {
+        std::cout<<head->getData()<<" ";
+        printLinkedList(head->getNext());
+    }
+}
+
+int Node:: getData() const
+{
+    return data;
+}
+
+Node* Node:: getNext() const
+{
+    return next;
+}
+
+void Node:: setNext(Node * n)
+{
+    next = n;
+}
+
+void Node:: setData(int data)
+{
+    this->data=data;
+}
+
