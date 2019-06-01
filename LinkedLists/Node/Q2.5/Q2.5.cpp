@@ -69,7 +69,7 @@ int main()
     second->appendToTail(9);
     second->appendToTail(2);
     
-   result->head = sumLists(first->head,first->head);
+   result->head = sumListsReversed(first->head,first->head);
     
     cout<<"The Result is: " ;
     printLinkedList(result->head);
