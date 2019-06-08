@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "LinkedList.h"
-
+#include <stack>
 using namespace std;
 
 //First thoughts: Can be done by reversing linked list and comparing, the first half of the reversed to the linked list
@@ -51,7 +51,42 @@ bool isPalindrome(SinglyLinkedListNode* head)
     
 }
 
-//I said at the beginning that only half of the linked lists need to be compared, to do that we can use a stack if we have the size, time complexity will remain at O(n) but will be faster
+//I said at the beginning that only half of the linked lists need to be compared, to do that we can use a stack , time complexity will remain at O(n) but will be faster
+//If we have the size of the linked list we would iterate over the first half push it to the stack, then continue iterating and compare with the rest of the list
+//If we do not know the size we will use the runner technique
+//Odd case will have to be handled
+bool isPalindromeStack(SinglyLinkedListNode* head)
+{
+    SinglyLinkedListNode* slow = head,*fast = head;
+    
+    stack<int> stack;
+    
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        stack.push(slow->data);
+        slow= slow->next;
+        fast = slow->next;
+    }
+    
+    //odd case, middle element will be ignored
+    if(fast!=NULL)
+        slow = slow->next;
+    
+    //compare the stack to the rest of the linked list
+    while(slow!=NULL)
+    {
+        if(stack.top()!=slow->data)
+            return false;
+        slow = slow->next;
+        stack.pop();
+    }
+    
+    return true;
+    
+}
+
+//Last solution is the solution she has for and approached it recursively, i will come back to solve later and understand better
+
 //Test function
 int main()
 {
@@ -63,7 +98,15 @@ int main()
 
     cout<<"Is Linked List a palindrome: "<<isPalindrome(first->head)<<endl;
     
+    
+    //Test second function (stack)
+     cout<<"Is Linked List a palindromeStack: "<<isPalindromeStack(first->head)<<endl;
+    
+    //Testing recursive approach
+    
     free(first->head);
+    
+    
 }
 
 
