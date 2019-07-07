@@ -14,22 +14,36 @@
 //Using the running pointer technique, they will collide at a place, will have to figure out where they collide and if they collide
 
 
-bool isCircular(SinglyLinkedListNode* head)
+//Return Node where they collide
+SinglyLinkedListNode* isCircular(SinglyLinkedListNode* head)
 {
     SinglyLinkedListNode* slowRunner=head;
     SinglyLinkedListNode* fastRunner=head;
     
     do{
         if(fastRunner->next==NULL)
-            return false;
+            return NULL;
         slowRunner= slowRunner->next;
         fastRunner = fastRunner->next->next;
         
 
     }while(slowRunner !=fastRunner);
-    return true;
+    return fastRunner;
 }
 
+SinglyLinkedListNode* findBeginning(SinglyLinkedListNode* head)
+{
+    SinglyLinkedListNode* first = head;
+    SinglyLinkedListNode* second = isCircular(head);
+    if(second==NULL)
+        return NULL;
+    while(first!=second)
+    {
+        first = first->next;
+        second = second->next;
+    }
+    return first;
+}
 int main()
 {
     SinglyLinkedList* first = new SinglyLinkedList();
@@ -37,12 +51,10 @@ int main()
     for(int i=1;i<10;i++)
         first->appendToTail(i);
     
-    first->tail->next = first->head->next;
+    first->tail->next = first->head->next->next->next;
     
-    cout<<"Is the linked list corrupt? " <<boolalpha<<isCircular(first->head)<<endl;
-    
-    cout<<"Hello"<<endl;
-    
+    cout<<"Circular Linked List starts at: " <<findBeginning(first->head)->data<<endl;
+
 }
 
 
