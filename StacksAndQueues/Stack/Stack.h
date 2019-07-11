@@ -1,10 +1,13 @@
-//Stack Class from the book
+//Stack Class from the book, altered for C++
 
-#define "STACK_H"
-#ifndef "STACK_H"
+#ifndef STACK_H
+#define STACK_H
+
 
 #include <iostream>
 using namespace std;
+
+
 
 template <class T>
 class Stack
@@ -12,24 +15,40 @@ class Stack
     private:
         class StackNode
         {
-            private:
+            public:
                 T data;
                 StackNode* next;
-        
-            public:
+            
                 StackNode(T data)
                 {
                     this->data = data;
+                    next = NULL;
                 }
         };
     private:
-        StackNode top;
+        StackNode* top;
     public:
+        Stack():top(NULL){}
         T pop(void );
         void push(T item);
         T peek(void);
-        bool isEmpy();
+        bool isEmpty(void);
+
 };
+
+//Print stack from top to bottom
+template<class T>
+void printStack(Stack<T> stack)
+{
+    if(!stack.isEmpty())
+    {
+        cout<<stack.peek()<<", ";
+        stack.pop();
+        printStack(stack);
+        
+    }
+}
+
 
 template <class T>
 T Stack<T>:: pop(void)
@@ -43,10 +62,25 @@ T Stack<T>:: pop(void)
 template <class T>
 void Stack<T>:: push(T item)
 {
-    StackNode t = new StackNode(item);
+    StackNode *t = new StackNode(item);
     t->next= top;
     top = t;
     
 }
 
+template <class T>
+bool Stack<T>:: isEmpty(void)
+{
+    return top == NULL;
+}
+
+template<class T>
+T Stack<T>:: peek(void)
+{
+    if(top == NULL) throw "Empty Stack!";
+    return top->data;
+    
+}
+
+        
 #endif
