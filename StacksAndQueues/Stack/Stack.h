@@ -29,8 +29,8 @@ class Stack
         StackNode* top;
     public:
         Stack():top(NULL){}
-        T pop(void );
-        void push(T item);
+        virtual T pop(void );
+        virtual void push(T item);
         T peek(void);
         bool isEmpty(void);
 
