@@ -1,3 +1,4 @@
+package CtCILibrary;
 
 public class TreeNode {
 	public int data;      
@@ -62,4 +63,19 @@ public class TreeNode {
 
 		return true;
 	}
+
+
+	public int height()
+	{
+		return ;
+	}
+
+	public boolean isBalanced()
+	{
+
+			if(height(left)-height(right)>1)
+				return false;
+
+	}
+
 }
